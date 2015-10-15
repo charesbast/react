@@ -1,0 +1,15 @@
+
+@import '../variables.css';
+
+
+.MyCartButton{
+    float: right;
+    background: transparent;
+    border: none;
+    color: rgb(146, 229, 252);
+    font-size: 1.75em;
+}
+
+.MyCartButton-icon{
+    font-style: normal;
+}
