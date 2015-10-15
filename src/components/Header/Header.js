@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import styles from './Header.css';
 import withStyles from '../../decorators/withStyles';
+import MyCartButton from '../MyCartButton';
 import Link from '../Link';
-import Navigation from '../Navigation';
 
 @withStyles(styles)
 class Header extends Component {
@@ -15,9 +15,11 @@ class Header extends Component {
         <div className="Header-container">
           <a className="Header-brand" href="/" onClick={Link.handleClick}>
             <img className="Header-brandImg" src={require('./logo-small.png')} width="38" height="38" alt="React" />
-            <span className="Header-brandTxt">Your Company</span>
+            <span className="Header-brandTxt">Hari Potier Library</span>
           </a>
-          <Navigation className="Header-nav" />
+
+          <MyCartButton />
+
           <div className="Header-banner">
             <h1 className="Header-bannerTitle">React</h1>
             <p className="Header-bannerDesc">Complex web apps made easy</p>

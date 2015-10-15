@@ -17,17 +17,6 @@ class Html extends Component {
     description: ''
   };
 
-  trackingCode() {
-    return ({__html:
-      `(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=` +
-      `function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;` +
-      `e=o.createElement(i);r=o.getElementsByTagName(i)[0];` +
-      `e.src='https://www.google-analytics.com/analytics.js';` +
-      `r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));` +
-      `ga('create','${googleAnalyticsId}','auto');ga('send','pageview');`
-    });
-  }
-
   render() {
     return (
       <html className="no-js" lang="">
@@ -38,12 +27,12 @@ class Html extends Component {
         <meta name="description" content={this.props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
         <style id="css" dangerouslySetInnerHTML={{__html: this.props.css}} />
       </head>
       <body>
-        <div id="app" dangerouslySetInnerHTML={{__html: this.props.body}} />
+        <div id="app"/>
         <script src="/app.js"></script>
-        <script dangerouslySetInnerHTML={this.trackingCode()} />
       </body>
       </html>
     );
