@@ -31,8 +31,7 @@ class MyCartButton extends Component{
     render(){
         return (
             <button className="MyCartButton">
-                Mon panier
-                <i className="fa fa-shopping-cart">{this.state.itemsCount}</i>
+                Mon panier <i className="fa fa-shopping-cart"></i> {this.state.itemsCount}
             </button>
         );
     }
