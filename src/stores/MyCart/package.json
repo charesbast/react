@@ -1,0 +1,6 @@
+{
+  "name": "MyCart",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MyCart.store.js"
+}

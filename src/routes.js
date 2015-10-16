@@ -5,7 +5,6 @@ import Router from 'react-routing/src/Router';
 import http from './core/HttpClient';
 import App from './components/App';
 import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -15,7 +14,7 @@ const router = new Router(on => {
     return component && <App context={state.context}>{component}</App>;
   });
 
-  on('/contact', async () => <ContactPage />);
+  //on('/contact', async () => <ContactPage />);
 
   on('*', async (state) => {
     const content = await http.get(`/api/content?path=${state.path}`);

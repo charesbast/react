@@ -2,7 +2,7 @@
  * Created by M08180 on 15/10/2015.
  */
 import React, { PropTypes, Component } from 'react';
-import MyCartStore from '../../stores/MyCart/MyCart.store.js';
+import MyCartStore from '../../stores/MyCart';
 import styles from './MyCartButton.css';
 import withStyles from '../../decorators/withStyles';
 

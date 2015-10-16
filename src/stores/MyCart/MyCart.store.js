@@ -1,5 +1,5 @@
 import Reflux from "reflux";
-import Actions from "../../actions/actions.js";
+import Actions from "../../actions/Actions.js";
 
 const localStorageKey = '';
 
