@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import styles from './Header.css';
 import withStyles from '../../decorators/withStyles';
-import MyCartButton from '../MyCartButton';
+import MyCartButton from '../MyCartButton/MyCartButton.js';
 import Link from '../Link';
 
 @withStyles(styles)

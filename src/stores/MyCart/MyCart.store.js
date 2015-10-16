@@ -1,9 +1,5 @@
-/**
- * Created by M08180 on 15/10/2015.
- */
-
 import Reflux from "reflux";
-import Actions from "../actions/actions.js";
+import Actions from "../../actions/actions.js";
 
 const localStorageKey = '';
 
@@ -13,7 +9,7 @@ function getItemByKey(list,itemKey){
     });
 }
 
-var MyCart = Reflux.createStore({
+var MyCartStore = Reflux.createStore({
 
     listenables: [Actions],
 
@@ -23,17 +19,31 @@ var MyCart = Reflux.createStore({
         return this.list;
     },
 
-    onAddItem: (item) => {
-        console.log(item);
-        this.updateList([item].concat(this.list));
-    },
-
     updateList: (list) => {
         localStorage.setItem(localStorageKey, JSON.stringify(list));
         this.list = list;
         this.trigger(list);
+    },
+
+
+    // listeners on actions
+    onAddItem: (item) => {
+        item.qqt = 0;
+        this.updateList([item].concat(this.list));
+    },
+
+    onAddOneQuantity: (item) => {
+
+    },
+
+    onRemoveOneQuantity: (item) => {
+
+    },
+
+    onRemoveItem: (item) => {
+
     }
 
 });
 
-export default Reflux;
+export default MyCartStore;

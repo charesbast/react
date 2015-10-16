@@ -2,25 +2,37 @@
  * Created by M08180 on 15/10/2015.
  */
 import React, { PropTypes, Component } from 'react';
+import MyCartStore from '../../stores/MyCart/MyCart.store.js';
 import styles from './MyCartButton.css';
 import withStyles from '../../decorators/withStyles';
 
 @withStyles(styles)
 class MyCartButton extends Component{
 
-    static defaultProps = {
+    // get initial state
+    state = {
         itemsCount: 0
     };
 
-    static propTypes = {
-        itemsCount : React.PropTypes.number.isRequired
-    };
+    onMyCartChange(newList){
+        this.setState({
+            itemsCount: newList.length
+        })
+    }
+
+    componentDidMount(){
+        this.unsubscribe = MyCartStore.listen(this.onMyCartChange);
+    }
+
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
 
     render(){
         return (
             <button className="MyCartButton">
                 Mon panier
-                <i className="fa fa-shopping-cart">{this.props.itemsCount}</i>
+                <i className="fa fa-shopping-cart">{this.state.itemsCount}</i>
             </button>
         );
     }
