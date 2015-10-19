@@ -22,19 +22,19 @@ const AUTOPREFIXER_BROWSERS = [
   'Explorer >= 9',
   'iOS >= 7',
   'Opera >= 12',
-  'Safari >= 7.1',
+  'Safari >= 7.1'
 ];
 const GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
-  __DEV__: DEBUG,
+  __DEV__: DEBUG
 };
 const JS_LOADER = {
   test: /\.jsx?$/,
   include: [
     path.resolve(__dirname, '../node_modules/react-routing/src'),
-    path.resolve(__dirname, '../src'),
+    path.resolve(__dirname, '../src')
   ],
-  loader: 'babel-loader',
+  loader: 'babel-loader'
 };
 
 //
@@ -45,7 +45,7 @@ const JS_LOADER = {
 const config = {
   output: {
     publicPath: '/',
-    sourcePrefix: '  ',
+    sourcePrefix: '  '
   },
 
   cache: DEBUG,
@@ -60,44 +60,44 @@ const config = {
     chunks: VERBOSE,
     chunkModules: VERBOSE,
     cached: VERBOSE,
-    cachedAssets: VERBOSE,
+    cachedAssets: VERBOSE
   },
 
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin()
   ],
 
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx'],
+    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx']
   },
 
   module: {
     loaders: [
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json-loader'
       }, {
         test: /\.txt$/,
-        loader: 'raw-loader',
+        loader: 'raw-loader'
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000'
       }, {
         test: /\.(eot|ttf|wav|mp3)$/,
-        loader: 'file-loader',
-      },
-    ],
+        loader: 'file-loader'
+      }
+    ]
   },
 
   postcss: function plugins() {
     return [
       require('postcss-import')({
-        onImport: files => files.forEach(this.addDependency),
+        onImport: files => files.forEach(this.addDependency)
       }),
       require('postcss-nested')(),
-      require('postcss-cssnext')({ autoprefixer: AUTOPREFIXER_BROWSERS }),
+      require('postcss-cssnext')({ autoprefixer: AUTOPREFIXER_BROWSERS })
     ];
-  },
+  }
 };
 
 //
@@ -107,11 +107,11 @@ const config = {
 const appConfig = merge({}, config, {
   entry: [
     ...(WATCH ? ['webpack-hot-middleware/client'] : []),
-    './src/app.js',
+    './src/app.js'
   ],
   output: {
     path: path.join(__dirname, '../build/public'),
-    filename: 'app.js',
+    filename: 'app.js'
   },
 
   // Choose a developer tool to enhance debugging
@@ -124,15 +124,15 @@ const appConfig = merge({}, config, {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: VERBOSE,
-        },
+          warnings: VERBOSE
+        }
       }),
-      new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin()
     ] : []),
     ...(WATCH ? [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
-    ] : []),
+      new webpack.NoErrorsPlugin()
+    ] : [])
   ],
   module: {
     loaders: [
@@ -148,22 +148,22 @@ const appConfig = merge({}, config, {
                 {
                   transform: 'react-transform-hmr',
                   imports: ['react'],
-                  locals: ['module'],
+                  locals: ['module']
                 }, {
                   transform: 'react-transform-catch-errors',
-                  imports: ['react', 'redbox-react'],
-                },
-              ],
-            },
-          },
-        },
+                  imports: ['react', 'redbox-react']
+                }
+              ]
+            }
+          }
+        }
       } : JS_LOADER,
       ...config.module.loaders,
       {
         test: /\.css$/,
-        loader: 'style-loader/useable!css-loader!postcss-loader',
-      },
-    ],
+        loader: 'style-loader/useable!css-loader!postcss-loader'
+      }
+    ]
   }
 });
 
@@ -176,7 +176,7 @@ const serverConfig = merge({}, config, {
   output: {
     path: './build',
     filename: 'server.js',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'commonjs2'
   },
   target: 'node',
   externals: [
@@ -186,7 +186,7 @@ const serverConfig = merge({}, config, {
         !request.match(/^react-routing/) &&
         !context.match(/[\\/]react-routing/);
       cb(null, Boolean(isExternal));
-    },
+    }
   ],
   node: {
     console: false,
@@ -194,14 +194,14 @@ const serverConfig = merge({}, config, {
     process: false,
     Buffer: false,
     __filename: false,
-    __dirname: false,
+    __dirname: false
   },
   devtool: 'source-map',
   plugins: [
     ...config.plugins,
     new webpack.DefinePlugin(GLOBALS),
     new webpack.BannerPlugin('require("source-map-support").install();',
-      { raw: true, entryOnly: false }),
+      { raw: true, entryOnly: false })
   ],
   module: {
     loaders: [
@@ -209,10 +209,10 @@ const serverConfig = merge({}, config, {
       ...config.module.loaders,
       {
         test: /\.css$/,
-        loader: 'css-loader!postcss-loader',
-      },
-    ],
-  },
+        loader: 'css-loader!postcss-loader'
+      }
+    ]
+  }
 });
 
 export default [appConfig, serverConfig];

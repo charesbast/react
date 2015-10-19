@@ -26,13 +26,16 @@ class Html extends Component {
         <title>{this.props.title}</title>
         <meta name="description" content={this.props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
         <style id="css" dangerouslySetInnerHTML={{__html: this.props.css}} />
+        <link href="//cdn.muicss.com/mui-0.2.1/css/mui.min.css" rel="stylesheet" type="text/css" />
       </head>
       <body>
         <div id="app"/>
         <script src="/app.js"></script>
+        <script src="../../../bower_components/mui/dist/js/mui.min.js"></script>
       </body>
       </html>
     );

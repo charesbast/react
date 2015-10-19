@@ -4,7 +4,7 @@ import React from 'react';
 import Router from 'react-routing/src/Router';
 import http from './core/HttpClient';
 import App from './components/App';
-import ContentPage from './components/ContentPage';
+import ShopPage from './components/ShopPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -18,7 +18,7 @@ const router = new Router(on => {
 
   on('*', async (state) => {
     const content = await http.get(`/api/content?path=${state.path}`);
-    return content && <ContentPage {...content} />;
+    return content && <ShopPage {...content} />;
   });
 
   on('error', (state, error) => state.statusCode === 404 ?
