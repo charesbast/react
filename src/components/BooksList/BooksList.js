@@ -19,9 +19,9 @@ class BooksList extends Component{
     };
 
     render() {
-        var bookNodes = this.props.books.map((book) => {
+        var bookNodes = this.props.books.map((book, id) => {
             return (
-                <BookItem key={book.isbn} cover={book.cover} title={book.title} price={book.price}></BookItem>
+                <BookItem key={id} book={book}></BookItem>
             );
         });
         

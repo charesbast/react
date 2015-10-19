@@ -1,46 +1,42 @@
 import Reflux from "reflux";
 import Actions from "../../actions/actions.js";
-
-const localStorageKey = '';
-
-function getItemByKey(list,itemKey){
-    return _.find(list, function(item) {
-        return item.key === itemKey;
-    });
-}
+import _ from 'lodash';
 
 var MyCartStore = Reflux.createStore({
 
     listenables: [Actions],
 
     // Getting items in the local storage
-    getInitialState: () => {
-        this.list = localStorage.getItem(localStorageKey);
+    init: function(){
+        this.list = [];
         return this.list;
     },
 
-    updateList: (list) => {
-        localStorage.setItem(localStorageKey, JSON.stringify(list));
+    updateList: function(list){
         this.list = list;
         this.trigger(list);
     },
 
 
     // listeners on actions
-    onAddItem: (item) => {
-        item.qqt = 0;
-        this.updateList([item].concat(this.list));
+    onAddItem: function(item){
+        item.qqt = 1;
+        if(_.find(this.list, {isbn: item.isbn}) == undefined) {
+            this.updateList([item].concat(this.list));
+        }else{
+            this.onAddOneQuantity(item);
+        }
     },
 
-    onAddOneQuantity: (item) => {
+    onAddOneQuantity: function(item){
+        console.log("addOneQuantity", item);
+    },
+
+    onRemoveOneQuantity: function(item){
 
     },
 
-    onRemoveOneQuantity: (item) => {
-
-    },
-
-    onRemoveItem: (item) => {
+    onRemoveItem: function(item){
 
     }
 

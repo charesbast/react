@@ -21,7 +21,8 @@ class MyCartButton extends Component{
     }
 
     componentDidMount(){
-        this.unsubscribe = MyCartStore.listen(this.onMyCartChange);
+
+        this.unsubscribe = MyCartStore.listen( (newList) => {this.onMyCartChange(newList)});
     }
 
     componentWillUnmount(){
