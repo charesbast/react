@@ -5,6 +5,7 @@ import React, { PropTypes, Component } from 'react';
 import MyCartStore from '../../stores/MyCart';
 import styles from './MyCartButton.css';
 import withStyles from '../../decorators/withStyles';
+import Link from '../Link';
 
 @withStyles(styles)
 class MyCartButton extends Component{
@@ -21,7 +22,6 @@ class MyCartButton extends Component{
     }
 
     componentDidMount(){
-
         this.unsubscribe = MyCartStore.listen( (newList) => {this.onMyCartChange(newList)});
     }
 
@@ -32,7 +32,9 @@ class MyCartButton extends Component{
     render(){
         return (
             <button className="MyCartButton">
+                <a href="/cart">
                 Mon panier <i className="fa fa-shopping-cart"></i> {this.state.itemsCount}
+                </a>
             </button>
         );
     }

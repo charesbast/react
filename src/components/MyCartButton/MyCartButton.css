@@ -9,6 +9,11 @@
     font-size: 1.75em;
 }
 
+.MyCartButton a{
+    text-decoration: none;
+    color: inherit;
+}
+
 .MyCartButton-icon{
     font-style: normal;
 }
