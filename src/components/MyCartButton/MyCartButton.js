@@ -12,7 +12,7 @@ class MyCartButton extends Component{
 
     // get initial state
     state = {
-        itemsCount: 0
+        itemsCount: MyCartStore.list.length
     };
 
     onMyCartChange(newList){
@@ -22,7 +22,9 @@ class MyCartButton extends Component{
     }
 
     componentDidMount(){
-        this.unsubscribe = MyCartStore.listen( (newList) => {this.onMyCartChange(newList)});
+        this.unsubscribe = MyCartStore.listen( (newList) => {
+            this.onMyCartChange(newList)
+        });
     }
 
     componentWillUnmount(){
