@@ -35,7 +35,6 @@ class Html extends Component {
       <body>
         <div id="app"/>
         <script src="/app.js"></script>
-        <script src="../../../bower_components/mui/dist/js/mui.min.js"></script>
       </body>
       </html>
     );
