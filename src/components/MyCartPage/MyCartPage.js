@@ -14,14 +14,15 @@ var MyCartPage = React.createClass({
     getInitialState: function(){
         return {
             myCart: MyCartStore.list,
-            offers: {}
+            offers: CommercialOffers.list
         }
+
     },
 
     render: function(){
         let style = {
-            "margin": "0 20%",
-            "padding-bottom": "60px"
+            margin: "0 20%",
+            paddingBottom: "60px"
         };
         return(
             <div className="MyCartPage" style={style}>

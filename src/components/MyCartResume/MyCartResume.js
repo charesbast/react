@@ -4,42 +4,61 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './MyCartResume.css';
 import withStyles from '../../decorators/withStyles';
-import MyCartStore from '../../stores/MyCart/MyCart.store.js';
-import CommercialOffers from '../../stores/CommercialOffers/CommercialOffers.store.js';
+import CommercialOffers from '../../stores/CommercialOffers';
+import _ from 'lodash';
 
 @withStyles(styles)
 class MyCartResume extends Component{
 
-    state = {
-        myCart: MyCartStore.list,
-        offers: {}
+    static defaultProps = {
+        myCart: [],
+        offers: []
     };
 
-    onMyCartChange(newList){
-        this.setState({
-            myChart: newList
+    static propTypes = {
+        myCart: React.PropTypes.array.isRequired,
+        offers: React.PropTypes.array.isRequired
+    };
+
+    getFullPrice(){
+        var total = 0;
+        _.forEach(this.props.myCart, function(item){
+            total+= item.price*item.qqt;
         });
+        return total;
     }
 
-    onOffersChange(offers){
-        this.setState({
-            offers: offers
-        });
-    }
+    getBestOffer() {
+        let offers = this.props.offers.slice(0);
+        if (offers && offers.length > 0) {
+            var fullPrice = this.getFullPrice();
 
-    componentDidMount(){
-        this.unsubscribeOffers = CommercialOffers.listen( (newOffers) => { this.onOffersChange(newOffers);} );
-        this.unsubscribeMyChart = MyCartStore.listen( (newList) => { this.onMyCartChange(newList);} );
-    }
-
-    componentWillUnmount(){
-        this.unsubscribeMyChart();
-        this.unsubscribeOffers();
+            _.forEach(offers, function (offer) {
+                if (offer.type === 'percentage') {
+                    offer.calculatedDiscount = fullPrice * (offer.value / 100);
+                } else if (offer.type === 'minus') {
+                    offer.calculatedDiscount = offer.value;
+                } else if (offer.type === 'slice') {
+                    offer.calculatedDiscount = Math.floor(fullPrice / offer.sliceValue) * offer.value;
+                }
+            });
+            return _.max(offers, 'calculatedDiscount');
+        }else{
+            return {calculatedDiscount: 0};
+        }
     }
 
     render(){
+        var bestOffer = this.getBestOffer(),
+            fullPrice = this.getFullPrice();
+
         return (
-            <div className="MyCartResume"></div>
+            <div className="MyCartResume">
+                <h1>Paiement</h1>
+                <h3>Prix total: {fullPrice}€</h3>
+                <h4>Remise: {bestOffer.calculatedDiscount}€</h4>
+                <h3>Prix final: {fullPrice - bestOffer.calculatedDiscount}€</h3>
+            </div>
         )
     }
 }
