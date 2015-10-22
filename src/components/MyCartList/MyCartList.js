@@ -6,6 +6,8 @@ import styles from './MyCartList.css';
 import withStyles from '../../decorators/withStyles';
 import { List } from 'material-ui';
 import MyCartItem from '../MyCartItem';
+import MyCartStore from '../../stores/MyCart/MyCart.store.js';
+
 
 @withStyles(styles)
 class MyCartList extends Component{
@@ -26,12 +28,9 @@ class MyCartList extends Component{
             )
         });
 
-        let subHeader = (
-          <h1><i className="fa fa-shopping-cart"></i> Mon panier</h1>
-        );
-
         return (
-            <List subheader={subHeader} className="MyCartList">
+            <List className="MyCartList">
+                <h1 className="MyCartList-subHeader"><i className="fa fa-shopping-cart"></i> Mon panier</h1>
                 {myCartItems}
             </List>
         )

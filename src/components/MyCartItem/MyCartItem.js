@@ -8,17 +8,16 @@ import { ListItem, Avatar, IconButton } from 'material-ui';
 import BookItem from '../BookItem';
 import Actions from '../../actions/actions.js';
 
+
 @withStyles(styles)
 class MyCartItem extends BookItem{
 
     handleAddQuantity(){
         Actions.addOneQuantity(this.props.item);
     }
-
     handleRemoveOneQuantity(){
         Actions.removeOneQuantity(this.props.item);
     }
-
     handleRemoveItem(){
         Actions.removeItem(this.props.item);
     }
@@ -29,19 +28,19 @@ class MyCartItem extends BookItem{
         let secondaryText = (
             <p>
                 {this.props.item.price+"€"}<br/>
-                <button className="MyCartItem-button" onClick={this.handleRemoveOneQuantity}>-</button>
+                <button className="MyCartItem-button" onClick={this.handleRemoveOneQuantity.bind(this)}>-</button>
                 {this.props.item.qqt}
-                <button className="MyCartItem-button" onClick={this.handleAddQuantity}>+</button>
+                <button className="MyCartItem-button" onClick={this.handleAddQuantity.bind(this)}>+</button>
             </p>
         );
-        let removeButton = (<IconButton iconClassName="fa fa-trash" tooltip="Supprimer" onClick={this.handleRemoveItem}/>);
+        let removeButton = (<IconButton iconClassName="fa fa-trash" tooltip="Supprimer" onClick={this.handleRemoveItem.bind(this)}/>);
 
         return (
             <div className="MyCartItem">
                 <ListItem disabled={true}
                           leftAvatar={avatar}
                           primaryText={this.props.item.title}
-                          secondaryTextLines={3}
+                          secondaryTextLines={2}
                           secondaryText={secondaryText}
                           rightIconButton={removeButton}>
                 </ListItem>

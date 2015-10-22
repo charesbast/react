@@ -1,4 +1,5 @@
 .MyCartItem{
+    padding: 0 10px;
 }
 .MyCartItem .MyCartItem-button{
     background-color: transparent;

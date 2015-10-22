@@ -18,7 +18,6 @@ let CommercialOffers  = Reflux.createStore({
     },
 
     onMyCartChange: function(items){
-        console.log("CommercialOffers => onMyCartChange", items);
         this.getCommercialOffers(items);
     },
 

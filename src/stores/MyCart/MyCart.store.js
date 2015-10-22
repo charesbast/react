@@ -28,27 +28,34 @@ let MyCartStore = Reflux.createStore({
         this.trigger(this.list);
     },
 
-
     // listeners on actions
     onAddItem: function(item){
-        item.qqt = 1;
-        if(_.find(this.list, {isbn: item.isbn}) == undefined) {
+        var itemInMyList = _.find(this.list, {isbn: item.isbn});
+
+        if(itemInMyList == undefined) {
+            // new item in my list
+            item.qqt = 1;
             this.updateList([item].concat(this.list));
         }else{
-            this.onAddOneQuantity(item);
+            this.onAddOneQuantity(itemInMyList);
         }
     },
 
     onAddOneQuantity: function(item){
-        console.log("addOneQuantity", item);
+        _.assign(_.find(this.list, {isbn: item.isbn}), {qqt: item.qqt+1});
+        this.updateList(this.list);
     },
 
     onRemoveOneQuantity: function(item){
-
+        if(item.qqt > 1) {
+            _.assign(_.find(this.list, {isbn: item.isbn}), {qqt: item.qqt - 1});
+        }
+        this.updateList(this.list);
     },
 
     onRemoveItem: function(item){
-
+        this.list = _.reject(this.list, {isbn: item.isbn});
+        this.updateList(this.list);
     }
 
 });

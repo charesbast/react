@@ -5,6 +5,9 @@
 .Footer {
   background: #333;
   color: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .Footer-container {

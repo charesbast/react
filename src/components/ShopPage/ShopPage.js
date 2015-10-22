@@ -40,12 +40,9 @@ class ShopPage extends Component {
     render() {
         this.context.onSetTitle(this.props.title);
         return (
-
             <div className="ShopPage">
-                <div className="ShopPage-container">
-                    {this.props.path === '/' ? null : <h1>{this.props.title}</h1>}
-                    <BooksList books={this.state.books}></BooksList>
-                </div>
+                {this.props.path === '/' ? null : <h1>{this.props.title}</h1>}
+                <BooksList books={this.state.books}></BooksList>
             </div>
         );
     }
