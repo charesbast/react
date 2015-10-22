@@ -4,28 +4,48 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './MyCartItem.css';
 import withStyles from '../../decorators/withStyles';
-import { ListItem } from 'material-ui';
-import BookItem from '../BookItem'
+import { ListItem, Avatar, IconButton } from 'material-ui';
+import BookItem from '../BookItem';
+import Actions from '../../actions/actions.js';
 
 @withStyles(styles)
 class MyCartItem extends BookItem{
 
-    //static defaultProps = {
-    //    item: {
-    //        qqt: 1
-    //    }
-    //};
-    //
-    //static propTypes = {
-    //
-    //};
+    handleAddQuantity(){
+        Actions.addOneQuantity(this.props.item);
+    }
+
+    handleRemoveOneQuantity(){
+        Actions.removeOneQuantity(this.props.item);
+    }
+
+    handleRemoveItem(){
+        Actions.removeItem(this.props.item);
+    }
 
     render(){
 
-        return (
-            <ListItem leftAvatar={this.props.item.cover}>
+        let avatar = (<Avatar src={this.props.item.cover}/>);
+        let secondaryText = (
+            <p>
+                {this.props.item.price+"€"}<br/>
+                <button className="MyCartItem-button" onClick={this.handleRemoveOneQuantity}>-</button>
+                {this.props.item.qqt}
+                <button className="MyCartItem-button" onClick={this.handleAddQuantity}>+</button>
+            </p>
+        );
+        let removeButton = (<IconButton iconClassName="fa fa-trash" tooltip="Supprimer" onClick={this.handleRemoveItem}/>);
 
-            </ListItem>
+        return (
+            <div className="MyCartItem">
+                <ListItem disabled={true}
+                          leftAvatar={avatar}
+                          primaryText={this.props.item.title}
+                          secondaryTextLines={3}
+                          secondaryText={secondaryText}
+                          rightIconButton={removeButton}>
+                </ListItem>
+            </div>
         )
     }
 }

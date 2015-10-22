@@ -5,6 +5,7 @@ import React, { PropTypes, Component } from 'react';
 import styles from './MyCartList.css';
 import withStyles from '../../decorators/withStyles';
 import { List } from 'material-ui';
+import MyCartItem from '../MyCartItem';
 
 @withStyles(styles)
 class MyCartList extends Component{
@@ -19,14 +20,18 @@ class MyCartList extends Component{
 
 
     render(){
-        var myCartItems = this.props.myCart.map((cartItem, index) => {
+        let myCartItems = this.props.myCart.map((cartItem, index) => {
             return (
                 <MyCartItem key={index} item={cartItem}></MyCartItem>
             )
         });
 
+        let subHeader = (
+          <h1><i className="fa fa-shopping-cart"></i> Mon panier</h1>
+        );
+
         return (
-            <List subheader="Mon panier">
+            <List subheader={subHeader} className="MyCartList">
                 {myCartItems}
             </List>
         )
