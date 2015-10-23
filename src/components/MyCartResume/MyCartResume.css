@@ -1,0 +1,9 @@
+.MyCartResume-fullPrice{
+    color: #6d6a69;
+    text-decoration: line-through;;
+}
+
+.MyCartResume-finalPrice{
+    color: #ef3f32;
+    font-weight: bolder;
+}

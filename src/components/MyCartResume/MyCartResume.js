@@ -5,6 +5,7 @@ import React, { PropTypes, Component } from 'react';
 import styles from './MyCartResume.css';
 import withStyles from '../../decorators/withStyles';
 import CommercialOffers from '../../stores/CommercialOffers';
+import Discount from '../Discount';
 import _ from 'lodash';
 
 @withStyles(styles)
@@ -44,7 +45,7 @@ class MyCartResume extends Component{
             });
             return _.max(offers, 'calculatedDiscount');
         }else{
-            return {calculatedDiscount: 0};
+            return {type: '', value: 0, calculatedDiscount: 0};
         }
     }
 
@@ -54,10 +55,10 @@ class MyCartResume extends Component{
 
         return (
             <div className="MyCartResume">
-                <h1>Paiement</h1>
-                <h3>Prix total: {fullPrice}€</h3>
-                <h4>Remise: {bestOffer.calculatedDiscount}€</h4>
-                <h3>Prix final: {fullPrice - bestOffer.calculatedDiscount}€</h3>
+                <h1 className="MyCartResume-title">Paiement</h1>
+                <h3 className="MyCartResume-fullPrice">Prix total: {fullPrice}€</h3>
+                <Discount offer={bestOffer}></Discount>
+                <h3 className="MyCartResume-finalPrice">Prix final: {fullPrice - bestOffer.calculatedDiscount}€</h3>
             </div>
         )
     }
