@@ -31,7 +31,7 @@ class Footer extends Component {
           <span className="Footer-spacer">·</span>
           <a className="Footer-link" href="/privacy" onClick={Link.handleClick}>Privacy</a>
           <span className="Footer-spacer">·</span>
-          <a className="Footer-link" href="/not-found" onClick={Link.handleClick}>Not Found</a>
+          <a className="Footer-link" href="/contact" onClick={Link.handleClick}>Contact</a>
           <span className="Footer-spacer"> | </span>
           <span ref="viewport" className="Footer-viewport Footer-text Footer-text--muted">Viewport:</span>
         </div>

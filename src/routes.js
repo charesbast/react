@@ -4,10 +4,11 @@ import React from 'react';
 import Router from 'react-routing/src/Router';
 import http from './core/HttpClient';
 import App from './components/App';
-import ShopPage from './components/ShopPage';
-import MyCartPage from './components/MyCartPage';
-import NotFoundPage from './components/NotFoundPage';
-import ErrorPage from './components/ErrorPage';
+import ShopPage from './components/PageShop';
+import MyCartPage from './components/PageMyCart';
+import NotFoundPage from './components/PageNotFound';
+import ErrorPage from './components/PageError';
+import ContactPage from './components/PageContact';
 
 const router = new Router(on => {
   on('*', async (state, next) => {
@@ -16,6 +17,8 @@ const router = new Router(on => {
   });
 
   on('/cart', async () => <MyCartPage />);
+
+  on('/contact', async() => <ContactPage />);
 
   on('*', async (state) => {
     const content = await http.get(`/api/content?path=${state.path}`);
