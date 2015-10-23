@@ -38,7 +38,7 @@ class BookItem extends Component{
                     <h3 className="BookItem-title" title={this.props.book.title}>{this.props.book.title}</h3>
                     <p className="BookItem-price">{this.props.book.price} €</p>
                 </div>
-                <RaisedButton className="BookItem-button" label="Ajouter au panier" primary={true} onClick={this.handleClick.bind(this)}>
+                <RaisedButton className="BookItem-button" label="Acheter" primary={true} onClick={this.handleClick.bind(this)}>
                     <FontIcon className="BookItem-icon fa fa-cart-plus"/>
                 </RaisedButton>
             </div>

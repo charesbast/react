@@ -42,7 +42,7 @@ class ShopPage extends Component {
         return (
             <div className="ShopPage">
                 {this.props.path === '/' ? null : <h1>{this.props.title}</h1>}
-                <BooksList books={this.state.books}></BooksList>
+                <BooksList title="Série Hari Potier" books={this.state.books}></BooksList>
             </div>
         );
     }

@@ -11,10 +11,12 @@ import BookItem from '../BookItem';
 class BooksList extends Component{
 
     static defaultProps = {
+        title: '',
         books: []
     };
 
     static propTypes = {
+        title: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired
     };
 
@@ -27,6 +29,7 @@ class BooksList extends Component{
         
         return (
             <div className="BooksList">
+                <h1 className="BooksList-title">{this.props.title}</h1>
                 {bookNodes}
             </div>
         );
