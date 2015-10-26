@@ -4,15 +4,10 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './ContactForm.css';
 import withStyles from '../../decorators/withStyles';
-import { Card, CardHeader, CardTitle, CardActions, CardText, FlatButton, TextField } from 'material-ui';
+import { CardActions, FlatButton, TextField } from 'material-ui';
 
 @withStyles(styles)
 class ContactForm extends Component{
-
-    static propTypes = {
-        title: React.PropTypes.string,
-        subtitle: React.PropTypes.string
-    };
 
     handleSubmit(event){
         event.preventDefault();
@@ -36,45 +31,34 @@ class ContactForm extends Component{
 
 
     render(){
-        let cardTitle;
-        if(this.props.title || this.props.subtitle){
-            cardTitle = <CardTitle title={this.props.title} subtitle={this.props.subtitle}/>;
-        }
 
         return(
             <div className="ContactForm">
-                <Card>
-                    {cardTitle}
+                <form name="contactForm" onSubmit={this.handleSubmit.bind(this)}>
 
-                    <div className="ContactForm-content">
-                        <form name="contactForm" onSubmit={this.handleSubmit.bind(this)}>
+                    <TextField className="ContactForm-input"
+                               floatingLabelText="Prénom"
+                               value={this.state.firstName}
+                               onChange={this.handleInputChange.bind(this, 'firstName')}
+                               errorText={this.state.firstNameErrorText}
+                               required>
+                    </TextField>
 
-                            <TextField className="ContactForm-input"
-                                floatingLabelText="Prénom"
-                                value={this.state.firstName}
-                                onChange={this.handleInputChange.bind(this, 'firstName')}
-                                errorText={this.state.firstNameErrorText}
-                                required>
-                            </TextField>
+                    <TextField
+                        className="ContactForm-input"
+                        floatingLabelText="Nom"
+                        value={this.state.lastName}
+                        onChange={this.handleInputChange.bind(this, 'lastName')}
+                        errorText={this.state.lastNameErrorText}
+                        required>
+                    </TextField>
 
-                            <TextField
-                                className="ContactForm-input"
-                                floatingLabelText="Nom"
-                                value={this.state.lastName}
-                                onChange={this.handleInputChange.bind(this, 'lastName')}
-                                errorText={this.state.lastNameErrorText}
-                                required>
-                            </TextField>
+                    <textarea className="ContactForm-input" name="msg" id="msg" cols="30" rows="10"></textarea>
 
-                            <textarea className="ContactForm-input" name="msg" id="msg" cols="30" rows="10"></textarea>
-
-                            <CardActions className="ContactForm-actions">
-                                <FlatButton type="submit" label="Envoyer"/>
-                            </CardActions>
-
-                        </form>
-                    </div>
-                </Card>
+                    <CardActions className="ContactForm-actions">
+                        <FlatButton type="submit" label="Envoyer"/>
+                    </CardActions>
+                </form>
             </div>
         )
     }

@@ -1,16 +1,16 @@
+.ContactForm{
+    margin: 0 15px;
+}
 .ContactForm .ContactForm-input{
     display: block !important;
 }
-.ContactForm .ContactForm-input div{
+.ContactForm-input div{
     bottom: 18px !important;
 }
-.ContactForm textarea.ContactForm-input {
+textarea.ContactForm-input {
     width: 100%;
     margin-top: 20px;
     padding: 10px;
-}
-.ContactForm-content{
-    margin: 0 15px;
 }
 .ContactForm-actions{
     text-align: right;

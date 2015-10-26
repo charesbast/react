@@ -5,6 +5,7 @@ import React, { PropTypes, Component } from 'react';
 import styles from './ContactPage.css';
 import withStyles from '../../decorators/withStyles';
 import ContactForm from '../ContactForm';
+import { Card, CardTitle } from 'material-ui';
 
 @withStyles(styles)
 class ContactPage extends Component{
@@ -13,7 +14,10 @@ class ContactPage extends Component{
     render(){
         return(
             <div className="ContactPage">
-                <ContactForm title="Contact" />
+                <Card className="ContactPage-formCard">
+                    <CardTitle title='Contact'/>
+                    <ContactForm />
+                </Card>
             </div>
         )
     }
