@@ -4,7 +4,7 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './ContactForm.css';
 import withStyles from '../../decorators/withStyles';
-import { Card, CardHeader, CardTitle, CardActions, CardText, FlatButton } from 'material-ui';
+import { Card, CardHeader, CardTitle, CardActions, CardText, FlatButton, TextField } from 'material-ui';
 
 @withStyles(styles)
 class ContactForm extends Component{
@@ -14,13 +14,26 @@ class ContactForm extends Component{
         subtitle: React.PropTypes.string
     };
 
-    handleCancel(){
-
+    handleSubmit(event){
+        event.preventDefault();
     }
 
-    handleSubmit(form){
+    handleInputChange(field, event){
+        let modifiedState = {};
+        modifiedState[field] = event.target.value;
 
+        // Handling required attribute
+        modifiedState[field+'ErrorText'] = (event.target.attributes.hasOwnProperty('required') && event.target.value.length === 0) ? 'Champ requis' : '';
+        this.setState(modifiedState);
     }
+
+    state = {
+        firstName: '',
+        lastName: '',
+        firstNameErrorText: '',
+        lastNameErrorText: ''
+    };
+
 
     render(){
         let cardTitle;
@@ -32,18 +45,35 @@ class ContactForm extends Component{
             <div className="ContactForm">
                 <Card>
                     {cardTitle}
-                    <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                        Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                        Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                    </CardText>
 
-                    <CardActions className="ContactForm-actions">
-                        <FlatButton label="Annuler" onClick={this.handleCancel.bind(this)}/>
-                        <FlatButton label="Confirmer" onClick={this.handleSubmit.bind(this)}/>
-                    </CardActions>
+                    <div className="ContactForm-content">
+                        <form name="contactForm" onSubmit={this.handleSubmit.bind(this)}>
 
+                            <TextField className="ContactForm-input"
+                                floatingLabelText="Prénom"
+                                value={this.state.firstName}
+                                onChange={this.handleInputChange.bind(this, 'firstName')}
+                                errorText={this.state.firstNameErrorText}
+                                required>
+                            </TextField>
+
+                            <TextField
+                                className="ContactForm-input"
+                                floatingLabelText="Nom"
+                                value={this.state.lastName}
+                                onChange={this.handleInputChange.bind(this, 'lastName')}
+                                errorText={this.state.lastNameErrorText}
+                                required>
+                            </TextField>
+
+                            <textarea className="ContactForm-input" name="msg" id="msg" cols="30" rows="10"></textarea>
+
+                            <CardActions className="ContactForm-actions">
+                                <FlatButton type="submit" label="Envoyer"/>
+                            </CardActions>
+
+                        </form>
+                    </div>
                 </Card>
             </div>
         )
