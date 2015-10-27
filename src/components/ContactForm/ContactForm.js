@@ -9,6 +9,16 @@ import { CardActions, FlatButton, TextField } from 'material-ui';
 @withStyles(styles)
 class ContactForm extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            firstNameErrorText: '',
+            lastNameErrorText: ''
+        };
+    }
+
     handleSubmit(event){
         event.preventDefault();
     }
@@ -21,14 +31,6 @@ class ContactForm extends Component{
         modifiedState[field+'ErrorText'] = (event.target.attributes.hasOwnProperty('required') && event.target.value.length === 0) ? 'Champ requis' : '';
         this.setState(modifiedState);
     }
-
-    state = {
-        firstName: '',
-        lastName: '',
-        firstNameErrorText: '',
-        lastNameErrorText: ''
-    };
-
 
     render(){
 
